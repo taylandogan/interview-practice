@@ -11,6 +11,14 @@ class LinkedList:
         self.head = head
         self.tail = head
 
+    def find_len(self):
+        count = 0
+        ptr = self.head
+        while ptr:
+            count += 1
+            ptr = ptr.next
+        return count
+
     def insert_to_head(self, val):
         # Insert node
         new_node = Node(val)
@@ -37,7 +45,21 @@ class LinkedList:
             ptr = ptr.next
 
     def insert_val_on_index(self, index, val):
-        pass
+        if self.find_len() <= index:
+            raise ValueError("LinkedList is shorter than the index.")
+        # Fast forward to the index
+        ptr = self.head
+        while index > 0:
+            ptr = ptr.next
+            index -= 1
+        # Insert node
+        new_node = Node(val)
+        if not ptr:
+            ptr = new_node
+        else:
+            tmp = ptr.next
+            ptr.next = new_node
+            new_node.next = tmp
 
     def insert_dummy_to_head(self):
         self.insert_to_head(-1)
@@ -53,4 +75,8 @@ class LinkedList:
 if __name__ == '__main__':
     l = [1, 2, 3, 4]
     ll = LinkedList.build_ll_from_list(l)
+    print("Before: ")
+    ll.print_ll()
+    ll.insert_val_on_index(1, 5)
+    print("After: ")
     ll.print_ll()
