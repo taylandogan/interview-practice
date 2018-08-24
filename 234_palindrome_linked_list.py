@@ -11,8 +11,6 @@ def find_len(head):
     return length
 
 def stack_solution(head):
-    # Skip dummy node
-    head = head.next
     stack = []
     length = find_len(head)
     if length == 0 or length == 1:
@@ -21,10 +19,10 @@ def stack_solution(head):
     i = 0
     while i < length:
         if i < (length//2):
-            stack.append(head.value)
+            stack.append(head.val)
             head = head.next
         else:
-            if head.value == stack[-1]:
+            if head.val == stack[-1]:
                 stack.pop()
             head = head.next
         i += 1
